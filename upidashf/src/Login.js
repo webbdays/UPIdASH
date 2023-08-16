@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 const Login = () => {
   const navigate = useNavigate();
   const onSuccess = useCallback(() => {
-    navigate("Transactions");
+    navigate("/Transactions");
   }, [navigate]);
   return (
     <>
