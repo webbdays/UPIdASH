@@ -1,7 +1,7 @@
 import * as React from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import Typography from "@mui/material/Typography";
-
+import { getSessionToken } from "@descope/react-sdk";
 const columns = [
   { field: "id", headerName: "Transaction ID", width: 200 },
   { field: "from", headerName: "From", width: 130 },
@@ -27,81 +27,18 @@ const columns = [
     width: 160,
   },
 ];
-
-const rows = [
-  {
-    id: 4567328754326575,
-    from: "x1",
-    to: "y1",
-    ampunt: 35,
-    status: "success",
-    remarks: "shopping",
-  },
-  {
-    id: 45673274867253676,
-    from: "x1",
-    to: "y2",
-    ampunt: 35,
-    status: "Failed",
-    remarks: "food",
-  },
-  {
-    id: 45673287543876176,
-    from: "x1",
-    to: "y2",
-    ampunt: 35,
-    status: "success",
-    remarks: "food",
-  },
-  {
-    id: 72336538761386438,
-    from: "x2",
-    to: "y3",
-    ampunt: 500,
-    status: "success",
-    remarks: "electricity bill",
-  },
-  {
-    id: 43647663827638763,
-    from: "Snow",
-    to: "Jon",
-    ampunt: 10000,
-    status: "success",
-    remarks: "rent",
-  },
-  {
-    id: 873563489478543673,
-    from: "Snow",
-    to: "Jon",
-    ampunt: 70,
-    status: "success",
-    remarks: "food",
-  },
-  {
-    id: 84765485612348731,
-    from: "Snow",
-    to: "Jon",
-    ampunt: 35,
-    status: "success",
-    remarks: "shopping",
-  },
-  {
-    id: 783673673563387,
-    from: "Snow",
-    to: "Jon",
-    ampunt: 35,
-    status: "success",
-    remarks: "shopping",
-  },
-  {
-    id: 87635456373489137376,
-    from: "Snow",
-    to: "Jon",
-    ampunt: 35,
-    status: "success",
-    remarks: "shopping",
-  },
-];
+const sessionToken = getSessionToken();
+var rows = [];
+fetch("https://nn55qv-3003.csb.app/getTransactions", {
+  method: "GET",
+  headers: { Authorization: "Bearer " + sessionToken },
+})
+  .then((res) => {
+    rows = res.data;
+  })
+  .catch((err) => {
+    console.log(err);
+  });
 
 function Table2() {
   return (
